@@ -11,7 +11,8 @@ from user.models import User
 def menu_file_path(instance, filename):
     _, extension = os.path.splitext(filename)
     filename = (
-        f"{slugify(instance.restaurant.name)}-{datetime.datetime.now()}{extension}"
+        f"{slugify(instance.restaurant.name)}"
+        f"-{datetime.datetime.now()}{extension}"
     )
 
     return os.path.join("uploads/menus/", filename)
@@ -19,7 +20,9 @@ def menu_file_path(instance, filename):
 
 class Restaurant(models.Model):
     responsible_for_updating = models.ForeignKey(
-        User, on_delete=models.CASCADE, blank=True, null=True, related_name="restaurant"
+        User, on_delete=models.CASCADE,
+        blank=True, null=True,
+        related_name="restaurant"
     )
     name = models.CharField(max_length=64, blank=True)
     created_at = models.DateTimeField(auto_now=True)
@@ -41,7 +44,10 @@ class Menu(models.Model):
 
 
 class Employee(models.Model):
-    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(User,
+                             null=False,
+                             blank=False,
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.user.first_name}, {self.user.last_name}"

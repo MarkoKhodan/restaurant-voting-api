@@ -1,4 +1,3 @@
-from django.db import transaction
 from rest_framework import serializers
 
 from api.models import Restaurant, Employee, Menu
@@ -21,5 +20,3 @@ class MenuSerializer(serializers.ModelSerializer):
         model = Menu
         fields = "__all__"
         read_only_fields = ["votes"]
-
-

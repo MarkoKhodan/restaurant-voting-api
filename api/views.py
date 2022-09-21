@@ -1,17 +1,15 @@
 import datetime
-import json
-
-from django.conf import settings
-from django.db.models import Q, Max
-from django.shortcuts import render
-from rest_framework import mixins, viewsets, status
+from django.db.models import Max
+from rest_framework import mixins, status
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet
 
 from api.models import Restaurant, Menu, Employee, Vote
-from api.permisions import IsRestaurantStaffOrIfAuthenticatedReadOnly, IsEmployee
+from api.permisions import (
+    IsRestaurantStaffOrIfAuthenticatedReadOnly,
+    IsEmployee)
 from api.serializers import (
     MenuSerializer,
     RestaurantSerializer,
@@ -56,9 +54,8 @@ class MenuViewSet(
             return Menu.objects.filter(created_at__gt=YESTERDAY)
 
 
-
 class VoteAPIView(APIView):
-    permission_classes = (IsEmployee,)
+    permission_classes = (IsAuthenticated, IsEmployee,)
 
     def get(self, request, menu_id):
         user = self.request.user
