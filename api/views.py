@@ -1,6 +1,7 @@
 import datetime
 from django.db.models import Max
 from rest_framework import mixins, status
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -37,6 +38,9 @@ class EmployeeViewSet(
     serializer_class = EmployeeSerializer
     permission_classes = (IsAdminUser,)
 
+class MenuPagination(PageNumberPagination):
+    page_size = 10
+    max_page_size = 100
 
 class MenuViewSet(
     mixins.ListModelMixin,
@@ -47,6 +51,7 @@ class MenuViewSet(
     queryset = Menu.objects.all()
     serializer_class = MenuSerializer
     permission_classes = (IsRestaurantStaffOrIfAuthenticatedReadOnly,)
+    pagination_class = MenuPagination
 
     def get_queryset(self):
         if self.action == "list":
