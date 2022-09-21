@@ -38,9 +38,11 @@ class EmployeeViewSet(
     serializer_class = EmployeeSerializer
     permission_classes = (IsAdminUser,)
 
+
 class MenuPagination(PageNumberPagination):
     page_size = 10
     max_page_size = 100
+
 
 class MenuViewSet(
     mixins.ListModelMixin,
