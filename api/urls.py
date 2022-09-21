@@ -12,7 +12,7 @@ from api.views import (
 router = routers.DefaultRouter()
 
 router.register("restaurants", RestaurantViewSet)
-router.register("menus", MenuViewSet)
+router.register("menus", MenuViewSet, basename="menus")
 router.register("employees", EmployeeViewSet)
 
 urlpatterns = [
