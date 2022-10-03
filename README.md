@@ -1,6 +1,28 @@
-# Dockerized Cinema API
+# Restaurant Voting API
 
-API service for cinema management written on DRF
+API service for voting for menu written on DRF
+
+# Functionality
+
+
+- Authentication
+- Creating restaurant
+- Uploading menu for restaurant in pdf format(menu for each day)
+- Creating employee
+- Voting for the menu
+- Getting current day menu
+- Getting results for the current day
+
+
+# Features
+
+- JWT authenticated
+- Admin panel /admin/
+- Documentation is located at /api/doc/swagger/
+- Creating Employees and Restaurants allowed only for admin
+- Creating Menus allowed only for restaurants staff
+- Voting is possible for employees
+- Only one vote per day
 
 ## Installing using Github
 ### Mac Os
@@ -42,22 +64,10 @@ docker-compose build
 docker-compose up
 ```
 
-Getting access
+### Getting access
 
 
 ```shell
 python manage.py createsuperuser
 ```
 Then, login with http://127.0.0.1:8000/api/user/token/
-
-
-
-Features
-
-- JWT authenticated
-- Admin panel /admin/
-- Documentation is located at /api/doc/swagger/
-- Creating Employees and Restaurants allowed only for admin
-- Creating Menus allowed only for restaurants staff
-- Voting is possible for employees
-- Only one vote per day
